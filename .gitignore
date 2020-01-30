@@ -1,0 +1,16 @@
+/node_modules
+/build
+/client/node_modules
+
+.DS_Store
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.vscode
+
+dev.js
+./server/config/dev.js
+
+config
