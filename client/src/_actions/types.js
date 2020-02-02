@@ -1,1 +1,1 @@
-export const SAMPLE = 'sample';
+export const SAVE_MESSAGE = 'save_message';

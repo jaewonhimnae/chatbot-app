@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import Axios from 'axios';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { saveMessage } from '../_actions/message_actions';
 
 function Chatbot() {
-
+    const dispatch = useDispatch();
 
     useEffect(() => {
 
@@ -23,6 +24,12 @@ function Chatbot() {
                 }
             }
         }
+
+        dispatch(saveMessage(conversation))
+        console.log('text I sent', conversation)
+
+
+
         // We need to take care of the message Chatbot sent 
         const textQueryVariables = {
             text
@@ -36,7 +43,8 @@ function Chatbot() {
                 content: content
             }
 
-            console.log(conversation)
+            dispatch(saveMessage(conversation))
+
 
         } catch (error) {
             conversation = {
@@ -47,7 +55,9 @@ function Chatbot() {
                     }
                 }
             }
-            console.log(conversation)
+
+            dispatch(saveMessage(conversation))
+
 
         }
 
@@ -69,7 +79,9 @@ function Chatbot() {
                 content: content
             }
 
-            console.log(conversation)
+
+            dispatch(saveMessage(conversation))
+
 
         } catch (error) {
             let conversation = {
@@ -80,7 +92,7 @@ function Chatbot() {
                     }
                 }
             }
-            console.log(conversation)
+            dispatch(saveMessage(conversation))
         }
 
     }
