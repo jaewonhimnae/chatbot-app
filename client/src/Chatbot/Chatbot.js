@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveMessage } from '../_actions/message_actions';
 import Message from './Sections/Message';
+import { List, Icon, Avatar } from 'antd';
+import Card from "./Sections/Card";
 function Chatbot() {
     const dispatch = useDispatch();
     const messagesFromRedux = useSelector(state => state.message.messages)
@@ -36,13 +38,16 @@ function Chatbot() {
         try {
             //I will send request to the textQuery ROUTE 
             const response = await Axios.post('/api/dialogflow/textQuery', textQueryVariables)
-            const content = response.data.fulfillmentMessages[0]
-            conversation = {
-                who: 'bot',
-                content: content
-            }
 
-            dispatch(saveMessage(conversation))
+            for (let content of response.data.fulfillmentMessages) {
+
+                conversation = {
+                    who: 'bot',
+                    content: content
+                }
+
+                dispatch(saveMessage(conversation))
+            }
 
 
         } catch (error) {
@@ -72,14 +77,15 @@ function Chatbot() {
         try {
             //I will send request to the textQuery ROUTE 
             const response = await Axios.post('/api/dialogflow/eventQuery', eventQueryVariables)
-            const content = response.data.fulfillmentMessages[0]
-            let conversation = {
-                who: 'bot',
-                content: content
+            for (let content of response.data.fulfillmentMessages) {
+
+                let conversation = {
+                    who: 'bot',
+                    content: content
+                }
+
+                dispatch(saveMessage(conversation))
             }
-
-
-            dispatch(saveMessage(conversation))
 
 
         } catch (error) {
@@ -112,10 +118,41 @@ function Chatbot() {
         }
     }
 
+    const renderCards = (cards) => {
+        return cards.map((card,i) => <Card key={i} cardInfo={card.structValue} />)
+    }
+
+
     const renderOneMessage = (message, i) => {
         console.log('message', message)
 
-        return <Message key={i} who={message.who} text={message.content.text.text} />
+        // we need to give some condition here to separate message kinds 
+
+        // template for normal text 
+        if (message.content && message.content.text && message.content.text.text) {
+            return <Message key={i} who={message.who} text={message.content.text.text} />
+        } else if (message.content && message.content.payload.fields.card) {
+
+            const AvatarSrc = message.who === 'bot' ? <Icon type="robot" /> : <Icon type="smile" />
+
+            return <div>
+                <List.Item style={{ padding: '1rem' }}>
+                    <List.Item.Meta
+                        avatar={<Avatar icon={AvatarSrc} />}
+                        title={message.who}
+                        description={renderCards(message.content.payload.fields.card.listValue.values)}
+                    />
+                </List.Item>
+            </div>
+        }
+
+
+
+
+
+
+        // template for card message 
+
 
 
 
