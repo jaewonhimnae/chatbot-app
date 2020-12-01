@@ -16,15 +16,15 @@
   "author": "Jaewon Ahn",
   "license": "ISC",
   "dependencies": {
-    "actions-on-google": "^2.6.0",
-    "body-parser": "^1.18.3",
+    "actions-on-google": "^2.13.0",
+    "body-parser": "^1.19.0",
     "dialogflow": "^0.8.2",
     "dialogflow-fulfillment": "^0.6.1",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.20"
+    "express": "^4.17.1",
+    "mongoose": "^5.11.0"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "nodemon": "^1.18.10"
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.4"
   }
 }

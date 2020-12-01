@@ -107,7 +107,7 @@ function Chatbot() {
         if (e.key === "Enter") {
 
             if (!e.target.value) {
-                return alert('you need to type somthing first')
+                return alert('메세지를 입력해주세요.')
             }
 
             //we will send request to text query route 
