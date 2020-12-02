@@ -13,7 +13,6 @@ function App() {
        
         <Chatbot />
 
-
       </div>
     </div>
   )
