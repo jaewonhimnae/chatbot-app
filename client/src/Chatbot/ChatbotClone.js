@@ -9,8 +9,6 @@ function Chatbot() {
 
     const textQuery = async (text) => {
 
-        const conversations = []
-
         //우선은 받은 메세지를 화면에 나타내어 처리합니다.
         let conversation = {
             who: 'user',
@@ -21,7 +19,6 @@ function Chatbot() {
                 }
             }
         }
-        //conversations.push(conversation)
         console.log(conversation)
         const textQueryVariables = {
             text
@@ -37,7 +34,6 @@ function Chatbot() {
                 who: 'bot',
                 content: content
             }
-            // conversations.push(conversation)
             console.log(conversation)
         } catch (err) {
             conversation = {
@@ -48,7 +44,6 @@ function Chatbot() {
                     }
                 }
             }
-            // conversations.push(conversation)
             console.log(conversation)
         }
     }
