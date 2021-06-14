@@ -30,3 +30,20 @@ body {
   color: black !important;
 }
 
+p {
+  font-size: 17px;
+  position: absolute;
+  white-space: nowrap;
+  animation: floatText 5s infinite alternate ease-in-out;
+}
+
+@keyframes floatText {
+  from {
+    left: 00%;
+  }
+
+  to {
+    /* left: auto; */
+    left: 100%;
+  }
+}
